@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:tictactoe/provider/room_data_provider.dart';
 import 'package:tictactoe/resources/socket_method.dart';
 import 'package:tictactoe/screen/waiting_lobby_screen.dart';
+import 'package:tictactoe/widget/TicTacToe_Board.dart';
 import 'package:tictactoe/widget/score_board.dart';
 
 class GameScreen extends StatefulWidget {
@@ -19,6 +20,8 @@ class _GameScreenState extends State<GameScreen> {
     super.initState();
     _socketMethods.updateRoomListener(context);
     _socketMethods.updatePlayersListener(context);
+    _socketMethods.pointIncreaseListener(context);
+    _socketMethods.endGameListener(context);
   }
 
   @override
@@ -29,7 +32,9 @@ class _GameScreenState extends State<GameScreen> {
           : Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          ScoreBoard()
+          ScoreBoard(),
+          TicTacToeBoard(),
+          Text('${controller.roomData['turn']['nickname']}\'s turn')
         ],
       )
     ));
