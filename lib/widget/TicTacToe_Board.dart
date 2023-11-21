@@ -38,7 +38,9 @@ class _TicTacToeBoardState extends State<TicTacToeBoard> {
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
               onTap: (){
-                tapped(index,controller);
+                setState(() {
+                  tapped(index,controller);
+                });
               },
               child: Container(
                 decoration: BoxDecoration(
